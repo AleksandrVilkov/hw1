@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
@@ -27,8 +28,11 @@ public class HomeWork {
      * @return количество узлов от 0 до N, где N позиция на которой первый раз условие вернуло fals
      */
     public <T> int partitionBy(Node<T> list, Predicate<T> pred) {
-        //TODO реализовать метод
-        return 0;
+        int result = 0;
+        if (Objects.isNull(list)) return result;
+        if (pred.test(list.getValue())) result++;
+        result += partitionBy(list.getNext(), pred);
+        return result;
     }
 
     /**
@@ -41,6 +45,8 @@ public class HomeWork {
      * @return сам элемент
      */
     public <T> T findNthElement(Node<T> list, int n) {
-        return null;
+        if (Objects.isNull(list)) throw new IndexOutOfBoundsException("Элемент не найден");
+        if (n == list.getIndex()) return list.getValue();
+        return findNthElement(list.getNext(), n);
     }
 }

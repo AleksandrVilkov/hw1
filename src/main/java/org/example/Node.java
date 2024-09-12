@@ -18,8 +18,11 @@ public class Node<T> {
 
     private Node<T> next;
 
+    private int index;
+
     public Node(T value) {
         this.value = value;
+        this.index = 0;
     }
 
     public Node<T> add(T value) {
@@ -28,6 +31,7 @@ public class Node<T> {
             emptyNode = emptyNode.getNext();
         }
         Node<T> newNode = new Node<>(value);
+        newNode.setIndex(emptyNode.getIndex() + 1);
         emptyNode.setNext(newNode);
         return newNode;
     }
